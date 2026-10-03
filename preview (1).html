@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polovisual — визуальные решения</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #07070a;
+      --card: #101116;
+      --card2: #15161d;
+      --border: rgba(255,255,255,.09);
+      --text: #fff;
+      --muted: #9699a5;
+      --accent: #8b5cf6;
+      --accent2: #6d28d9;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(139,92,246,.14), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(109,40,217,.10), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1150px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7,7,10,.75);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: -.7px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      color: #b8bac5;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 17px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 30px rgba(139,92,246,.2);
+    }
+
+    .btn-secondary {
+      color: white;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger {
+      color: white;
+      background: rgba(239,68,68,.15);
+      border: 1px solid rgba(239,68,68,.3);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 680px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 60px;
+      padding: 80px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(139,92,246,.1);
+      border: 1px solid rgba(139,92,246,.25);
+      color: #c4b5fd;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background: #a78bfa;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #a78bfa;
+    }
+
+    h1 {
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: .98;
+      letter-spacing: -4px;
+      max-width: 700px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #fff, #a78bfa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 570px;
+    }
+
+    .hero-buttons {
+      margin-top: 32px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle, rgba(139,92,246,.25), transparent 65%);
+      filter: blur(20px);
+    }
+
+    .hero-image img {
+      position: relative;
+      width: 100%;
+      display: block;
+      border-radius: 25px;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 100px rgba(0,0,0,.55);
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      letter-spacing: -2px;
+    }
+
+    .section-title p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 27px;
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+
+    .feature h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* PRICES */
+
+    .prices {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .price-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      position: relative;
+      transition: .25s;
+    }
+
+    .price-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(139,92,246,.45);
+      box-shadow: 0 25px 70px rgba(0,0,0,.3);
+    }
+
+    .price-card.featured {
+      border-color: rgba(139,92,246,.55);
+      background:
+        linear-gradient(145deg, rgba(139,92,246,.12), rgba(255,255,255,.03));
+    }
+
+    .popular {
+      position: absolute;
+      top: 17px;
+      right: 17px;
+      font-size: 11px;
+      background: var(--accent);
+      padding: 6px 9px;
+      border-radius: 8px;
+    }
+
+    .price-card h3 {
+      font-size: 21px;
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: 900;
+      margin: 20px 0;
+    }
+
+    .price small {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .price-list {
+      list-style: none;
+      margin: 20px 0 28px;
+    }
+
+    .price-list li {
+      padding: 8px 0;
+      color: #b9bbc5;
+      font-size: 14px;
+    }
+
+    .price-list li::before {
+      content: "✓";
+      color: #a78bfa;
+      margin-right: 9px;
+    }
+
+    .price-card .btn {
+      width: 100%;
+    }
+
+    /* FAQ */
+
+    .faq {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: rgba(255,255,255,.025);
+    }
+
+    .faq-question {
+      width: 100%;
+      border: 0;
+      background: none;
+      color: white;
+      text-align: left;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 20px 20px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 35px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* MODAL */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(440px, 100%);
+      background: #111218;
+      border: 1px solid var(--border);
+      border-radius: 23px;
+      padding: 27px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.6);
+      animation: modalIn .2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(.96) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .modal-head h3 {
+      font-size: 23px;
+    }
+
+    .close {
+      border: 0;
+      background: rgba(255,255,255,.07);
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+
+    .modal-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 7px;
+    }
+
+    .modal-option {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: white;
+      border-radius: 14px;
+      padding: 17px;
+      margin-top: 10px;
+      text-align: left;
+      transition: .2s;
+    }
+
+    .modal-option:hover {
+      border-color: rgba(139,92,246,.5);
+      background: rgba(139,92,246,.08);
+    }
+
+    .modal-option strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .modal-option span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      outline: none;
+      background: rgba(255,255,255,.05);
+      color: white;
+      margin-bottom: 11px;
+    }
+
+    input:focus {
+      border-color: rgba(139,92,246,.7);
+    }
+
+    .form-error {
+      color: #f87171;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .form-success {
+      color: #4ade80;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    /* USER MENU */
+
+    #userMenu {
+      display: none;
+      position: relative;
+    }
+
+    .user-button {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: white;
+      padding: 9px 12px;
+      border-radius: 12px;
+    }
+
+    .user-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50px;
+      width: 210px;
+      background: #111218;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+
+    .user-dropdown.open {
+      display: block;
+    }
+
+    .user-dropdown button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: white;
+      padding: 11px;
+      border-radius: 9px;
+      text-align: left;
+    }
+
+    .user-dropdown button:hover {
+      background: rgba(255,255,255,.06);
+    }
+
+    /* ADMIN */
+
+    #adminSection {
+      display: none;
+    }
+
+    .admin-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .admin-top {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 16px;
+    }
+
+    .stat-number {
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .applications {
+      padding: 18px;
+    }
+
+    .application {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 16px;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .application-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .application strong {
+      font-size: 15px;
+    }
+
+    .application-info {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+
+    .status {
+      border: 0;
+      background: rgba(255,255,255,.07);
+      color: white;
+      padding: 8px 10px;
+      border-radius: 9px;
+      outline: none;
+    }
+
+    .status option {
+      background: #15161d;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+      nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 55px;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .features,
+      .prices {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .header-actions .btn-secondary {
+        display: none;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        width: min(100% - 22px, 1150px);
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 45px 0 70px;
+      }
+
+      .hero-text {
+        font-size: 15px;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+
+    <a href="#" class="logo">Polovi<span>sual</span></a>
+
+    <nav>
+      <a href="#about">О нас</a>
+      <a href="#prices">Тарифы</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="header-actions">
+
+      <button class="btn btn-secondary" id="loginBtn" onclick="openAuth('login')">
+        Войти
+      </button>
+
+      <button class="btn btn-primary" id="registerBtn" onclick="openAuth('register')">
+        Регистрация
+      </button>
+
+      <div id="userMenu">
+        <button class="user-button" onclick="toggleUserMenu()">
+          <span>👤</span>
+          <span id="userEmailShort">Аккаунт</span>
+        </button>
+
+        <div class="user-dropdown" id="userDropdown">
+          <button onclick="scrollToApplications()">📋 Мои заявки</button>
+          <button id="adminButton" style="display:none" onclick="scrollToAdmin()">👑 Админ-панель</button>
+          <button onclick="logout()">🚪 Выйти</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero container">
+
+    <div>
+
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Polovisual
+      </div>
+
+      <h1>
+        Создаём <span>визуал</span>,
+        который замечают.
+      </h1>
+
+      <p class="hero-text">
+        Современные визуальные решения для проектов, сообществ
+        и цифровых продуктов. Просто, красиво и доступно.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#prices" class="btn btn-primary">
+          Посмотреть тарифы
+        </a>
+
+        <a href="#about" class="btn btn-secondary">
+          Подробнее
+        </a>
+      </div>
+
+    </div>
+
+    <div class="hero-image">
+      <img src="menumain.png" alt="Polovisual">
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Почему Polovisual?</h2>
+        <p>Всё необходимое без лишней сложности.</p>
+      </div>
+
+      <div class="features">
+
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Быстро</h3>
+          <p>
+            Работаем без лишней бюрократии и стараемся
+            выполнять заказы максимально быстро.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🎨</div>
+          <h3>Современно</h3>
+          <p>
+            Делаем аккуратный и современный визуал,
+            который хорошо смотрится на любых устройствах.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">💰</div>
+          <h3>Доступно</h3>
+          <p>
+            Небольшие цены без обязательных бесплатных
+            пробных периодов и скрытых условий.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRICES -->
+
+  <section id="prices">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Тарифы</h2>
+        <p>Выбери подходящий вариант.</p>
+      </div>
+
+      <div class="prices">
+
+        <div class="price-card">
+
+          <h3>30 дней</h3>
+
+          <div class="price">
+            199 <small>₸</small>
+          </div>
+
+          <ul class="price-list">
+            <li>Доступ на 30 дней</li>
+            <li>Все основные возможности</li>
+            <li>Поддержка</li>
+          </ul>
+
+          <button
+            class="btn btn-primary"
+            onclick="openPurchase('30 дней', 199)"
+          >
+            Купить
+          </button>
+
+        </div>
+
+
+        <div class="price-card featured">
+
+          <div class="popular">ПОПУЛЯРНЫЙ</div>
+
+          <h3>90 дней</h3>
+
+          <div class="price">
+            499 <small>₸</small>
+          </div>
+
+          <ul class="price-list">
+            <li>Доступ на 90 дней</li>
+            <li>Все основные возможности</li>
+            <li>Поддержка</li>
+          </ul>
+
+          <button
+            class="btn btn-primary"
+            onclick="openPurchase('90 дней', 499)"
+          >
+            Купить
+          </button>
+
+        </div>
+
+
+        <div class="price-card">
+
+          <h3>Lifetime</h3>
+
+          <div class="price">
+            999 <small>₸</small>
+          </div>
+
+          <ul class="price-list">
+            <li>Бессрочный доступ</li>
+            <li>Все основные возможности</li>
+            <li>Поддержка</li>
+          </ul>
+
+          <button
+            class="btn btn-primary"
+            onclick="openPurchase('Lifetime', 999)"
+          >
+            Купить
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FAQ -->
+
+  <section id="faq">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>FAQ</h2>
+        <p>Ответы на частые вопросы.</p>
+      </div>
+
+      <div class="faq">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Как купить тариф?
+            <span>+</span>
+          </button>
+
+          <div class="faq-answer">
+            Выберите тариф, затем способ оплаты.
+            Можно оставить заявку через Telegram или перейти на FunPay.
+          </div>
+        </div>
+
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Как оставить заявку?
+            <span>+</span>
+          </button>
+
+          <div class="faq-answer">
+            Нажмите «Купить», выберите Telegram и укажите свой Telegram username.
+          </div>
+        </div>
+
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Нужна ли регистрация?
+            <span>+</span>
+          </button>
+
+          <div class="faq-answer">
+            Для отправки заявки через сайт необходимо войти в аккаунт.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ADMIN -->
+
+  <section id="adminSection">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Админ-панель</h2>
+        <p>Управление заявками Polovisual.</p>
+      </div>
+
+      <div class="admin-box">
+
+        <div class="admin-top">
+          <strong>Заявки</strong>
+
+          <button
+            class="btn btn-secondary"
+            onclick="loadApplications()"
+          >
+            Обновить
+          </button>
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+            <div class="stat-number" id="statAll">0</div>
+            <div class="stat-label">Всего заявок</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-number" id="statNew">0</div>
+            <div class="stat-label">Новые</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-number" id="statPaid">0</div>
+            <div class="stat-label">Оплачено</div>
+          </div>
+
+        </div>
+
+        <div class="applications" id="applications">
+          <div style="color:#9699a5">
+            Загрузка заявок...
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      © 2026 Polovisual
+    </div>
+
+    <div>
+      Визуал, который замечают.
+    </div>
+  </div>
+</footer>
+
+
+<!-- AUTH MODAL -->
+
+<div class="modal" id="authModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div>
+        <h3 id="authTitle">Вход</h3>
+        <div class="modal-sub" id="authSubtitle">
+          Войдите в аккаунт Polovisual
+        </div>
+      </div>
+
+      <button class="close" onclick="closeModal('authModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div class="form-error" id="authError"></div>
+
+    <input
+      type="email"
+      id="authEmail"
+      placeholder="Email"
+      autocomplete="email"
+    >
+
+    <input
+      type="password"
+      id="authPassword"
+      placeholder="Пароль"
+      autocomplete="current-password"
+    >
+
+    <button
+      class="btn btn-primary"
+      style="width:100%"
+      id="authSubmit"
+      onclick="submitAuth()"
+    >
+      Войти
+    </button>
+
+    <button
+      class="btn btn-secondary"
+      style="width:100%;margin-top:10px"
+      onclick="switchAuthMode()"
+      id="authSwitch"
+    >
+      Создать аккаунт
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PURCHASE MODAL -->
+
+<div class="modal" id="purchaseModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div>
+        <h3>Выберите оплату</h3>
+
+        <div class="modal-sub" id="purchaseInfo">
+          Тариф
+        </div>
+      </div>
+
+      <button class="close" onclick="closeModal('purchaseModal')">
+        ×
+      </button>
+
+    </div>
+
+    <button class="modal-option" onclick="openTelegramApplication()">
+      <strong>💬 Telegram</strong>
+      <span>Оставить заявку через Telegram</span>
+    </button>
+
+    <button class="modal-option" onclick="openFunPay()">
+      <strong>💳 FunPay</strong>
+      <span>Перейти на страницу FunPay</span>
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- TELEGRAM APPLICATION -->
+
+<div class="modal" id="telegramModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div>
+        <h3>Заявка</h3>
+
+        <div class="modal-sub" id="telegramTariff">
+          Тариф
+        </div>
+      </div>
+
+      <button class="close" onclick="closeModal('telegramModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div class="form-error" id="applicationError"></div>
+
+    <div class="form-success" id="applicationSuccess"></div>
+
+    <input
+      type="text"
+      id="telegramUsername"
+      placeholder="@username"
+    >
+
+    <button
+      class="btn btn-primary"
+      style="width:100%"
+      onclick="sendApplication()"
+    >
+      Отправить заявку
+    </button>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+  } from
+    "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    getDocs,
+    doc,
+    getDoc,
+    updateDoc,
+    serverTimestamp
+  } from
+    "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+
+  /* FIREBASE */
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_FM3NrzedYTFMr13I9ZtC2vYuC-BfQuQ",
+    authDomain: "polovisual.firebaseapp.com",
+    projectId: "polovisual",
+    storageBucket: "polovisual.firebasestorage.app",
+    messagingSenderId: "758903762314",
+    appId: "1:758903762314:web:0df8bd528abfef9bcbec73",
+    measurementId: "G-W4HYTK672M"
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const db = getFirestore(app);
+
+
+  /* GLOBAL STATE */
+
+  let authMode = "login";
+
+  let selectedTariff = "";
+  let selectedPrice = 0;
+
+  let currentUser = null;
+  let currentIsAdmin = false;
+
+
+  /* MODALS */
+
+  window.closeModal = function(id) {
+    document.getElementById(id).classList.remove("show");
+  };
+
+
+  window.openAuth = function(mode) {
+
+    authMode = mode;
+
+    document.getElementById("authModal").classList.add("show");
+
+    document.getElementById("authError").style.display = "none";
+
+    if (mode === "login") {
+
+      document.getElementById("authTitle").textContent = "Вход";
+
+      document.getElementById("authSubtitle").textContent =
+        "Войдите в аккаунт Polovisual";
+
+      document.getElementById("authSubmit").textContent =
+        "Войти";
+
+      document.getElementById("authSwitch").textContent =
+        "Создать аккаунт";
+
+    } else {
+
+      document.getElementById("authTitle").textContent =
+        "Регистрация";
+
+      document.getElementById("authSubtitle").textContent =
+        "Создайте аккаунт Polovisual";
+
+      document.getElementById("authSubmit").textContent =
+        "Зарегистрироваться";
+
+      document.getElementById("authSwitch").textContent =
+        "У меня уже есть аккаунт";
+    }
+  };
+
+
+  window.switchAuthMode = function() {
+
+    openAuth(
+      authMode === "login"
+        ? "register"
+        : "login"
+    );
+  };
+
+
+  window.submitAuth = async function() {
+
+    const email =
+      document.getElementById("authEmail").value.trim();
+
+    const password =
+      document.getElementById("authPassword").value;
+
+    const error =
+      document.getElementById("authError");
+
+    error.style.display = "none";
+
+    if (!email || !password) {
+
+      error.textContent =
+        "Заполни email и пароль.";
+
+      error.style.display = "block";
+
+      return;
+    }
+
+    if (password.length < 6) {
+
+      error.textContent =
+        "Пароль должен содержать минимум 6 символов.";
+
+      error.style.display = "block";
+
+      return;
+    }
+
+    try {
+
+      if (authMode === "register") {
+
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+      } else {
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+      }
+
+      closeModal("authModal");
+
+      document.getElementById("authEmail").value = "";
+      document.getElementById("authPassword").value = "";
+
+    } catch (err) {
+
+      console.error(err);
+
+      let message = "Произошла ошибка.";
+
+      if (err.code === "auth/email-already-in-use") {
+        message = "Этот email уже зарегистрирован.";
+      }
+
+      if (err.code === "auth/invalid-credential") {
+        message = "Неверный email или пароль.";
+      }
+
+      if (err.code === "auth/invalid-email") {
+        message = "Неверный email.";
+      }
+
+      if (err.code === "auth/weak-password") {
+        message = "Пароль слишком слабый.";
+      }
+
+      error.textContent = message;
+      error.style.display = "block";
+    }
+  };
+
+
+  /* AUTH STATE */
+
+  onAuthStateChanged(auth, async (user) => {
+
+    currentUser = user;
+
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const registerBtn =
+      document.getElementById("registerBtn");
+
+    const userMenu =
+      document.getElementById("userMenu");
+
+    const adminButton =
+      document.getElementById("adminButton");
+
+    const adminSection =
+      document.getElementById("adminSection");
+
+
+    if (user) {
+
+      loginBtn.style.display = "none";
+      registerBtn.style.display = "none";
+
+      userMenu.style.display = "block";
+
+      document.getElementById("userEmailShort").textContent =
+        user.email || "Аккаунт";
+
+      currentIsAdmin = await checkAdmin(user.uid);
+
+      if (currentIsAdmin) {
+
+        adminButton.style.display = "block";
+
+        adminSection.style.display = "block";
+
+        loadApplications();
+
+      } else {
+
+        adminButton.style.display = "none";
+
+        adminSection.style.display = "none";
+      }
+
+    } else {
+
+      loginBtn.style.display = "";
+      registerBtn.style.display = "";
+
+      userMenu.style.display = "none";
+
+      adminSection.style.display = "none";
+
+      currentIsAdmin = false;
+    }
+
+  });
+
+
+  /* CHECK ADMIN */
+
+  async function checkAdmin(uid) {
+
+    try {
+
+      const adminRef =
+        doc(db, "admins", uid);
+
+      const adminSnap =
+        await getDoc(adminRef);
+
+      return adminSnap.exists()
+        && adminSnap.data().admin === true;
+
+    } catch (error) {
+
+      console.error(
+        "Ошибка проверки администратора:",
+        error
+      );
+
+      return false;
+    }
+  }
+
+
+  /* USER MENU */
+
+  window.toggleUserMenu = function() {
+
+    document
+      .getElementById("userDropdown")
+      .classList.toggle("open");
+  };
+
+
+  window.logout = async function() {
+
+    await signOut(auth);
+
+    document
+      .getElementById("userDropdown")
+      .classList.remove("open");
+  };
+
+
+  window.scrollToApplications = function() {
+
+    document
+      .getElementById("userDropdown")
+      .classList.remove("open");
+
+    document
+      .getElementById("prices")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+  };
+
+
+  window.scrollToAdmin = function() {
+
+    document
+      .getElementById("userDropdown")
+      .classList.remove("open");
+
+    document
+      .getElementById("adminSection")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+  };
+
+
+  /* PURCHASE */
+
+  window.openPurchase = function(tariff, price) {
+
+    selectedTariff = tariff;
+    selectedPrice = price;
+
+    document.getElementById("purchaseInfo").textContent =
+      `${tariff} — ${price} ₸`;
+
+    document
+      .getElementById("purchaseModal")
+      .classList.add("show");
+  };
+
+
+  window.openFunPay = function() {
+
+    window.open(
+      "https://funpay.com/users/19327116/",
+      "_blank"
+    );
+  };
+
+
+  window.openTelegramApplication = function() {
+
+    if (!currentUser) {
+
+      closeModal("purchaseModal");
+
+      openAuth("login");
+
+      return;
+    }
+
+    closeModal("purchaseModal");
+
+    document.getElementById("telegramTariff").textContent =
+      `${selectedTariff} — ${selectedPrice} ₸`;
+
+    document.getElementById("telegramUsername").value = "";
+
+    document.getElementById("applicationError").style.display =
+      "none";
+
+    document.getElementById("applicationSuccess").style.display =
+      "none";
+
+    document
+      .getElementById("telegramModal")
+      .classList.add("show");
+  };
+
+
+  /* SEND APPLICATION */
+
+  window.sendApplication = async function() {
+
+    const username =
+      document
+        .getElementById("telegramUsername")
+        .value
+        .trim();
+
+    const error =
+      document.getElementById("applicationError");
+
+    const success =
+      document.getElementById("applicationSuccess");
+
+    error.style.display = "none";
+    success.style.display = "none";
+
+
+    if (!currentUser) {
+
+      error.textContent =
+        "Сначала войдите в аккаунт.";
+
+      error.style.display = "block";
+
+      return;
+    }
+
+
+    if (!username) {
+
+      error.textContent =
+        "Введите Telegram username.";
+
+      error.style.display = "block";
+
+      return;
+    }
+
+
+    try {
+
+      await addDoc(
+        collection(db, "applications"),
+        {
+          username: username,
+          tariff: selectedTariff,
+          price: selectedPrice,
+          userId: currentUser.uid,
+          userEmail: currentUser.email,
+          status: "Новая",
+          createdAt: serverTimestamp()
+        }
+      );
+
+
+      success.textContent =
+        "Заявка успешно отправлена! Мы свяжемся с вами в Telegram.";
+
+      success.style.display = "block";
+
+      document.getElementById("telegramUsername").value = "";
+
+    } catch (err) {
+
+      console.error(err);
+
+      error.textContent =
+        "Не удалось отправить заявку. Попробуйте ещё раз.";
+
+      error.style.display = "block";
+    }
+  };
+
+
+  /* ADMIN APPLICATIONS */
+
+  window.loadApplications = async function() {
+
+    if (!currentIsAdmin) return;
+
+    const container =
+      document.getElementById("applications");
+
+    container.innerHTML =
+      `<div style="color:#9699a5">Загрузка...</div>`;
+
+
+    try {
+
+      const q = query(
+        collection(db, "applications"),
+        orderBy("createdAt", "desc")
+      );
+
+      const snapshot =
+        await getDocs(q);
+
+
+      let total = 0;
+      let newCount = 0;
+      let paidCount = 0;
+
+
+      if (snapshot.empty) {
+
+        container.innerHTML =
+          `<div style="color:#9699a5">
+            Заявок пока нет.
+          </div>`;
+
+        updateStats(0, 0, 0);
+
+        return;
+      }
+
+
+      container.innerHTML = "";
+
+
+      snapshot.forEach((docSnap) => {
+
+        const data = docSnap.data();
+
+        total++;
+
+        if (data.status === "Новая") {
+          newCount++;
+        }
+
+        if (data.status === "Оплачено") {
+          paidCount++;
+        }
+
+
+        const div =
+          document.createElement("div");
+
+        div.className = "application";
+
+
+        let date = "Дата неизвестна";
+
+        if (data.createdAt) {
+
+          date =
+            data.createdAt
+              .toDate()
+              .toLocaleString("ru-RU");
+        }
+
+
+        div.innerHTML = `
+          <div class="application-top">
+
+            <strong>
+              ${escapeHtml(data.tariff || "Тариф")}
+            </strong>
+
+            <select class="status">
+              <option ${data.status === "Новая" ? "selected" : ""}>
+                Новая
+              </option>
+
+              <option ${data.status === "В работе" ? "selected" : ""}>
+                В работе
+              </option>
+
+              <option ${data.status === "Оплачено" ? "selected" : ""}>
+                Оплачено
+              </option>
+
+              <option ${data.status === "Закрыта" ? "selected" : ""}>
+                Закрыта
+              </option>
+            </select>
+
+          </div>
+
+          <div class="application-info">
+
+            💬 Telegram:
+            <strong>
+              ${escapeHtml(data.username || "-")}
+            </strong>
+
+            <br>
+
+            💰 Цена:
+            ${escapeHtml(String(data.price || 0))} ₸
+
+            <br>
+
+            📧 Email:
+            ${escapeHtml(data.userEmail || "-")}
+
+            <br>
+
+            🕐 Дата:
+            ${escapeHtml(date)}
+
+          </div>
+        `;
+
+
+        const select =
+          div.querySelector(".status");
+
+
+        select.addEventListener(
+          "change",
+          async () => {
+
+            try {
+
+              await updateDoc(
+                doc(
+                  db,
+                  "applications",
+                  docSnap.id
+                ),
+                {
+                  status: select.value
+                }
+              );
+
+              loadApplications();
+
+            } catch (error) {
+
+              alert(
+                "Не удалось изменить статус."
+              );
+            }
+          }
+        );
+
+
+        container.appendChild(div);
+
+      });
+
+
+      updateStats(
+        total,
+        newCount,
+        paidCount
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      container.innerHTML =
+        `<div style="color:#f87171">
+          Не удалось загрузить заявки.
+        </div>`;
+    }
+  };
+
+
+  function updateStats(
+    total,
+    newCount,
+    paidCount
+  ) {
+
+    document.getElementById("statAll")
+      .textContent = total;
+
+    document.getElementById("statNew")
+      .textContent = newCount;
+
+    document.getElementById("statPaid")
+      .textContent = paidCount;
+  }
+
+
+  /* SECURITY */
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+
+  /* FAQ */
+
+  document
+    .querySelectorAll(".faq-question")
+    .forEach((button) => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const item =
+            button.parentElement;
+
+          item.classList.toggle("open");
+
+          const icon =
+            button.querySelector("span");
+
+          icon.textContent =
+            item.classList.contains("open")
+              ? "−"
+              : "+";
+        }
+      );
+    });
+
+
+  /* CLOSE MODAL BY BACKDROP */
+
+  document
+    .querySelectorAll(".modal")
+    .forEach((modal) => {
+
+      modal.addEventListener(
+        "click",
+        (event) => {
+
+          if (event.target === modal) {
+            modal.classList.remove("show");
+          }
+
+        }
+      );
+    });
+
+</script>
+
+</body>
+</html>
